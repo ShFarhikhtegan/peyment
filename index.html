@@ -91,6 +91,7 @@
         .progress-tracker {
             padding: 30px;
             margin-bottom: 30px;
+            position: relative;
         }
         
         .progress-title {
@@ -234,25 +235,56 @@
             font-size: 14px;
         }
         
-        .stat-trend {
-            display: inline-block;
-            padding: 5px 12px;
+        .highlight-stat {
+            animation: pulse-glow 2s infinite alternate;
+            position: relative;
+            border: 2px solid rgba(108, 92, 231, 0.5);
+            box-shadow: 0 0 30px rgba(108, 92, 231, 0.3);
+        }
+        
+        @keyframes pulse-glow {
+            0% {
+                box-shadow: 0 0 15px rgba(108, 92, 231, 0.3);
+                transform: scale(1);
+            }
+            100% {
+                box-shadow: 0 0 30px rgba(108, 92, 231, 0.6);
+                transform: scale(1.02);
+            }
+        }
+        
+        .highlight-stat::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                135deg,
+                rgba(108, 92, 231, 0.1) 0%,
+                rgba(108, 92, 231, 0) 50%
+            );
+            z-index: -1;
+        }
+        
+        .progress-highlight {
+            position: absolute;
+            top: -15px;
+            left: -15px;
+            right: -15px;
+            bottom: -15px;
+            border: 2px dashed rgba(108, 92, 231, 0.5);
             border-radius: 20px;
-            font-size: 12px;
-            font-weight: bold;
-            margin-top: 10px;
+            pointer-events: none;
+            animation: border-pulse 3s infinite;
+            z-index: -1;
         }
         
-        .trend-up {
-            background-color: rgba(0, 184, 148, 0.2);
-            color: var(--success-color);
-            border: 1px solid var(--success-color);
-        }
-        
-        .trend-down {
-            background-color: rgba(214, 48, 49, 0.2);
-            color: var(--danger-color);
-            border: 1px solid var(--danger-color);
+        @keyframes border-pulse {
+            0% { opacity: 0.3; }
+            50% { opacity: 0.8; }
+            100% { opacity: 0.3; }
         }
         
         .download-section {
@@ -400,7 +432,6 @@
             background-color: rgba(108, 92, 231, 0.2);
         }
         
-        /* بخش هدف پروژه */
         .project-goal {
             padding: 30px;
             margin-bottom: 30px;
@@ -434,7 +465,6 @@
             border: 1px solid rgba(255,255,255,0.1);
         }
         
-        /* بخش اطلاعات بانکی */
         .bank-info {
             padding: 30px;
             margin-bottom: 30px;
@@ -493,7 +523,6 @@
             box-shadow: 0 3px 10px rgba(0,0,0,0.2);
         }
         
-        /* بخش گروه واتساپ */
         .whatsapp-group {
             padding: 30px;
             margin-bottom: 30px;
@@ -542,7 +571,6 @@
             font-size: 20px;
         }
         
-        /* دکمه بازگشت به بالا */
         .back-to-top {
             position: fixed;
             bottom: 30px;
@@ -574,7 +602,87 @@
             box-shadow: 0 8px 25px rgba(108, 92, 231, 0.6);
         }
         
-        /* رسپانسیو */
+        .footer {
+            background: linear-gradient(to bottom, #0f1519, #1e272e);
+            color: white;
+            padding: 60px 0 30px;
+            margin-top: 50px;
+            border-top: 1px solid rgba(108, 92, 231, 0.3);
+        }
+        
+        .footer-logo {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .footer-links h5 {
+            color: var(--secondary-color);
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-links h5::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 50px;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+        }
+        
+        .footer-links ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--secondary-color);
+            padding-right: 5px;
+        }
+        
+        .social-links a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            text-align: center;
+            line-height: 40px;
+            margin-left: 10px;
+            transition: all 0.3s;
+        }
+        
+        .social-links a:hover {
+            background: var(--primary-color);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 20px;
+            margin-top: 30px;
+            text-align: center;
+            color: rgba(255,255,255,0.5);
+            font-size: 14px;
+        }
+        
         @media (max-width: 768px) {
             .dashboard-header {
                 padding: 30px 0;
@@ -600,6 +708,14 @@
             
             .bank-details .card-number {
                 font-size: 18px;
+            }
+            
+            .footer {
+                padding: 40px 0 20px;
+            }
+            
+            .footer-links {
+                margin-bottom: 30px;
             }
         }
     </style>
@@ -635,7 +751,8 @@
         </ul>
 
         <!-- بخش پیشرفت پروژه -->
-        <div id="progress-section" class="progress-tracker glass-card">
+        <div id="progress-section" class="progress-tracker glass-card mb-5">
+            <div class="progress-highlight"></div>
             <h3 class="progress-title">
                 <i class="fas fa-chart-line"></i>
                 پیشرفت مالی پروژه
@@ -654,7 +771,7 @@
             </div>
             
             <div class="stats-grid">
-                <div class="stat-card glass-card">
+                <div class="stat-card glass-card highlight-stat">
                     <div class="stat-value">
                         <i class="fas fa-coins"></i>
                         <span id="collected-amount">248,000,000</span>&nbsp; تومان
@@ -720,6 +837,58 @@
         </div>
     </div>
 
+    <!-- فوتر جدید -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="footer-logo">پنل پرداخت‌های اعضا</div>
+                    <p>سیستم مدیریت پرداخت‌های جمعی برای پروژه برق‌رسانی شهرک فرهیختگان</p>
+                    <div class="social-links mt-3">
+                        <a href="#"><i class="fab fa-telegram"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-2 col-6 mb-4">
+                    <div class="footer-links">
+                        <h5>لینک‌های سریع</h5>
+                        <ul>
+                            <li><a href="#progress-section">پیشرفت پروژه</a></li>
+                            <li><a href="#goal-section">هدف پروژه</a></li>
+                            <li><a href="#bank-section">اطلاعات بانکی</a></li>
+                            <li><a href="#whatsapp-section">گروه واتساپ</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6 mb-4">
+                    <div class="footer-links">
+                        <h5>اطلاعات تماس</h5>
+                        <ul>
+                            <li><i class="fas fa-phone me-2"></i> 0912-000-0000</li>
+                            <li><i class="fas fa-envelope me-2"></i> info@example.com</li>
+                            <li><i class="fas fa-map-marker-alt me-2"></i> شهرک فرهیختگان، فاز 1</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <div class="footer-links">
+                        <h5>خبرنامه</h5>
+                        <p>برای دریافت آخرین اخبار و اطلاعیه‌ها ایمیل خود را وارد کنید:</p>
+                        <div class="input-group mb-3">
+                            <input type="email" class="form-control" placeholder="ایمیل شما">
+                            <button class="btn btn-primary" type="button">عضویت</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>تمامی حقوق مادی و معنوی این وبسایت محفوظ می‌باشد. © ۱۴۰۲</p>
+                <p>طراحی و توسعه توسط تیم فنی دارا</p>
+            </div>
+        </div>
+    </footer>
+
     <!-- دکمه بازگشت به بالا -->
     <div class="back-to-top" id="backToTop">
         <i class="fas fa-arrow-up"></i>
@@ -728,8 +897,8 @@
     <script>
         // تنظیمات پروژه
         const projectGoal = 1800000000; // هدف پروژه: 1,800,000,000 تومان
-        let collectedAmount = 268000000; // مبلغ جمع‌آوری شده: 255,000,000 تومان
-        let receiptsCount = 202; // تعداد فیش‌های واریزی
+        let collectedAmount = 265000000; // مبلغ جمع‌آوری شده: 255,000,000 تومان
+        let receiptsCount = 193; // تعداد فیش‌های واریزی
         
         // تابع برای محاسبه و نمایش اطلاعات مالی
         function updateFinancialInfo() {
@@ -815,6 +984,14 @@
                     });
                 });
             });
+            
+            // انیمیشن برای بخش جمع واریزی‌ها
+            const highlightStat = document.querySelector('.highlight-stat');
+            setInterval(() => {
+                highlightStat.style.animation = 'none';
+                void highlightStat.offsetWidth; // Trigger reflow
+                highlightStat.style.animation = 'pulse-glow 2s infinite alternate';
+            }, 5000);
         });
     </script>
 </body>
