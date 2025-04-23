@@ -669,6 +669,14 @@
                     </div>
                     <div class="stat-label">مانده تا هدف</div>
                 </div>
+                
+                <div class="stat-card glass-card">
+                    <div class="stat-value">
+                        <i class="fas fa-receipt"></i>
+                        <span id="receipts-count">193</span>&nbsp; فیش
+                    </div>
+                    <div class="stat-label">تعداد فیش‌های واریزی</div>
+                </div>
             </div>
         </div>
 
@@ -720,7 +728,8 @@
     <script>
         // تنظیمات پروژه
         const projectGoal = 1800000000; // هدف پروژه: 1,800,000,000 تومان
-        let collectedAmount = 265000000; // مبلغ جمع‌آوری شده: 255,000,000 تومان
+        let collectedAmount = 268000000; // مبلغ جمع‌آوری شده: 255,000,000 تومان
+        let receiptsCount = 202; // تعداد فیش‌های واریزی
         
         // تابع برای محاسبه و نمایش اطلاعات مالی
         function updateFinancialInfo() {
@@ -733,6 +742,7 @@
             // به‌روزرسانی عناصر HTML
             document.getElementById('collected-amount').textContent = formatNumber(collectedAmount);
             document.getElementById('remaining-amount').textContent = formatNumber(remainingAmount);
+            document.getElementById('receipts-count').textContent = formatNumber(receiptsCount);
             document.getElementById('progress-percentage').textContent = `${progressPercentage}% تکمیل شده`;
             document.getElementById('progress-bar').style.width = `${progressPercentage}%`;
             document.getElementById('progress-bar').setAttribute('aria-valuenow', progressPercentage);
