@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/fonts.css" rel="stylesheet">
+    <!-- افزودن Lightbox CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css" rel="stylesheet">
     <style>
         :root {
             --primary-color: #6c5ce7;
@@ -204,6 +206,79 @@
             z-index: -1;
         }
         
+        /* استایل‌های گالری تصاویر */
+        .gallery-section {
+            padding: 40px;
+        }
+        
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .gallery-item img {
+            transition: transform 0.5s ease;
+            object-fit: cover;
+            height: 250px;
+            width: 100%;
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+        
+        .gallery-caption {
+            background: rgba(30, 39, 46, 0.9);
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-size: 14px;
+            border-radius: 0 0 12px 12px;
+            margin-top: auto;
+        }
+        
+        .gallery-item:hover .gallery-caption {
+            background: var(--primary-color);
+        }
+        
+        /* استایل‌های Lightbox */
+        .lightbox .lb-image {
+            border-radius: 8px;
+        }
+
+        .lb-data .lb-caption {
+            font-size: 16px;
+            line-height: 1.6;
+            text-align: center;
+            font-family: 'Vazirmatn', sans-serif;
+        }
+
+        .lb-nav a.lb-prev, 
+        .lb-nav a.lb-next {
+            opacity: 0.8;
+            transition: opacity 0.3s;
+        }
+
+        .lb-nav a.lb-prev:hover, 
+        .lb-nav a.lb-next:hover {
+            opacity: 1;
+        }
+
+        .lb-close {
+            transition: opacity 0.3s;
+        }
+
+        .lb-close:hover {
+            opacity: 0.8;
+        }
+        
+        /* بقیه استایل‌ها... */
         .download-section {
             padding: 30px;
             margin: 30px 0;
@@ -488,47 +563,6 @@
             font-size: 20px;
         }
         
-        /* استایل‌های گالری تصاویر */
-        .gallery-section {
-            padding: 40px;
-        }
-        
-        .gallery-item {
-            position: relative;
-            overflow: hidden;
-            border-radius: 12px;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .gallery-item img {
-            transition: transform 0.5s ease;
-            object-fit: cover;
-            height: 250px;
-            width: 100%;
-        }
-        
-        .gallery-item:hover img {
-            transform: scale(1.05);
-        }
-        
-        .gallery-caption {
-            background: rgba(30, 39, 46, 0.9);
-            color: white;
-            padding: 15px;
-            text-align: center;
-            font-size: 14px;
-            border-radius: 0 0 12px 12px;
-            margin-top: auto;
-        }
-        
-        .gallery-item:hover .gallery-caption {
-            background: var(--primary-color);
-        }
-        
         .back-to-top {
             position: fixed;
             bottom: 30px;
@@ -702,10 +736,10 @@
                 <a class="nav-link active" href="#progress-section">پیشرفت پروژه</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#goal-section">هدف پروژه</a>
+                <a class="nav-link" href="#gallery-section">گالری تصاویر</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#gallery-section">گالری تصاویر</a>
+                <a class="nav-link" href="#goal-section">هدف پروژه</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#bank-section">اطلاعات بانکی</a>
@@ -741,6 +775,76 @@
             </div>
         </div>
 
+        <!-- بخش گالری تصاویر -->
+        <div id="gallery-section" class="gallery-section glass-card mb-5">
+            <h3 class="progress-title text-center mb-4">
+                <i class="fas fa-images"></i>
+                گالری تصاویر پیشرفت پروژه
+            </h3>
+            
+            <div class="row g-4">
+                <!-- تصویر 1 -->
+                <div class="col-md-4 col-sm-6">
+                    <div class="gallery-item">
+                        <a href="images/phase1.jpg" data-lightbox="project-gallery" data-title="آغاز عملیات حفاری - دی ۱۴۰۲">
+                            <img src="images/phase1.jpg" alt="آغاز عملیات حفاری" class="img-fluid rounded-3">
+                        </a>
+                        <div class="gallery-caption">آغاز عملیات حفاری - دی ۱۴۰۲</div>
+                    </div>
+                </div>
+                
+                <!-- تصویر 2 -->
+                <div class="col-md-4 col-sm-6">
+                    <div class="gallery-item">
+                        <a href="images/phase2.jpg" data-lightbox="project-gallery" data-title="نصب پایه‌های اولیه - بهمن ۱۴۰۲">
+                            <img src="images/phase2.jpg" alt="نصب پایه‌های اولیه" class="img-fluid rounded-3">
+                        </a>
+                        <div class="gallery-caption">نصب پایه‌های اولیه - بهمن ۱۴۰۲</div>
+                    </div>
+                </div>
+                
+                <!-- تصویر 3 -->
+                <div class="col-md-4 col-sm-6">
+                    <div class="gallery-item">
+                        <a href="images/phase3.jpg" data-lightbox="project-gallery" data-title="کابل‌کشی اصلی - اسفند ۱۴۰۲">
+                            <img src="images/phase3.jpg" alt="کابل‌کشی اصلی" class="img-fluid rounded-3">
+                        </a>
+                        <div class="gallery-caption">کابل‌کشی اصلی - اسفند ۱۴۰۲</div>
+                    </div>
+                </div>
+                
+                <!-- تصویر 4 -->
+                <div class="col-md-4 col-sm-6">
+                    <div class="gallery-item">
+                        <a href="images/phase4.jpg" data-lightbox="project-gallery" data-title="نصب ترانسفورماتور - فروردین ۱۴۰۳">
+                            <img src="images/phase4.jpg" alt="نصب ترانسفورماتور" class="img-fluid rounded-3">
+                        </a>
+                        <div class="gallery-caption">نصب ترانسفورماتور - فروردین ۱۴۰۳</div>
+                    </div>
+                </div>
+                
+                <!-- تصویر 5 -->
+                <div class="col-md-4 col-sm-6">
+                    <div class="gallery-item">
+                        <a href="images/phase5.jpg" data-lightbox="project-gallery" data-title="تست اولیه سیستم - اردیبهشت ۱۴۰۳">
+                            <img src="images/phase5.jpg" alt="تست اولیه سیستم" class="img-fluid rounded-3">
+                        </a>
+                        <div class="gallery-caption">تست اولیه سیستم - اردیبهشت ۱۴۰۳</div>
+                    </div>
+                </div>
+                
+                <!-- تصویر 6 -->
+                <div class="col-md-4 col-sm-6">
+                    <div class="gallery-item">
+                        <a href="images/phase6.jpg" data-lightbox="project-gallery" data-title="پایان فاز اول پروژه - خرداد ۱۴۰۳">
+                            <img src="images/phase6.jpg" alt="پایان فاز اول" class="img-fluid rounded-3">
+                        </a>
+                        <div class="gallery-caption">پایان فاز اول پروژه - خرداد ۱۴۰۳</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- بخش اطلاعات بانکی -->
         <div id="bank-section" class="bank-info glass-card">
             <h4><i class="fas fa-credit-card"></i>اطلاعات حساب بانکی برای واریز</h4>
@@ -767,76 +871,6 @@
             </a>
         </div>
 
-      <!-- بخش گالری تصاویر -->
-<div id="gallery-section" class="gallery-section glass-card mb-5">
-    <h3 class="progress-title text-center mb-4">
-        <i class="fas fa-images"></i>
-        گالری تصاویر پیشرفت پروژه
-    </h3>
-    
-    <div class="row g-4">
-        <!-- تصویر 1 -->
-        <div class="col-md-4 col-sm-6">
-            <div class="gallery-item">
-                <img src="images/phase1.jpg" 
-                     alt="آغاز عملیات حفاری" 
-                     class="img-fluid rounded-3">
-                <div class="gallery-caption">آغاز عملیات حفاری - دی ۱۴۰۲</div>
-            </div>
-        </div>
-        
-        <!-- تصویر 2 -->
-        <div class="col-md-4 col-sm-6">
-            <div class="gallery-item">
-                <img src="images/phase2.jpg" 
-                     alt="نصب پایه‌های اولیه" 
-                     class="img-fluid rounded-3">
-                <div class="gallery-caption">نصب پایه‌های اولیه - بهمن ۱۴۰۲</div>
-            </div>
-        </div>
-        
-        <!-- تصویر 3 -->
-        <div class="col-md-4 col-sm-6">
-            <div class="gallery-item">
-                <img src="images/phase3.jpg" 
-                     alt="کابل‌کشی اصلی" 
-                     class="img-fluid rounded-3">
-                <div class="gallery-caption">کابل‌کشی اصلی - اسفند ۱۴۰۲</div>
-            </div>
-        </div>
-        
-        <!-- تصویر 4 -->
-        <div class="col-md-4 col-sm-6">
-            <div class="gallery-item">
-                <img src="images/phase4.jpg" 
-                     alt="نصب ترانسفورماتور" 
-                     class="img-fluid rounded-3">
-                <div class="gallery-caption">نصب ترانسفورماتور - فروردین ۱۴۰۳</div>
-            </div>
-        </div>
-        
-        <!-- تصویر 5 -->
-        <div class="col-md-4 col-sm-6">
-            <div class="gallery-item">
-                <img src="images/phase5.jpg" 
-                     alt="تست اولیه سیستم" 
-                     class="img-fluid rounded-3">
-                <div class="gallery-caption">تست اولیه سیستم - اردیبهشت ۱۴۰۳</div>
-            </div>
-        </div>
-        
-        <!-- تصویر 6 -->
-        <div class="col-md-4 col-sm-6">
-            <div class="gallery-item">
-                <img src="images/phase6.jpg" 
-                     alt="پایان فاز اول" 
-                     class="img-fluid rounded-3">
-                <div class="gallery-caption">پایان فاز اول پروژه - خرداد ۱۴۰۳</div>
-            </div>
-        </div>
-    </div>
-</div>
-
         <!-- بخش هدف پروژه -->
         <div id="goal-section" class="project-goal glass-card">
             <h3><i class="fas fa-bullseye me-2"></i>هدف پروژه برق‌رسانی شهرک فرهیختگان</h3>
@@ -849,6 +883,7 @@
             در واقع، ما در حال پیشبرد مرحله‌ای اساسی و زیرساختی با هزینه شخصی هستیم تا زمین‌ها وارد مدار رونق شوند. در غیر این صورت، ممکن است سال‌ها منتظر بمانیم. بر اساس تجربه پروژه‌های مشابه، ورود برق به شهرک می‌تواند ارزش زمین‌ها را را به شکل چشمگیری افزایش می‌دهد، چرا که زمین از حالت بلااستفاده خارج شده و آماده برای ساخت‌وساز و سرمایه‌گذاری می‌شود. لذا از مالکان محترم خواهشمندیم که هرچه سریع‌تر این مبلغ ناچیز را پرداخت کرده و ان‌شاءالله همه در رشد و رونق شهرک سهیم شویم.</p>
         </div>
     </div>
+
 
     <!-- فوتر جدید -->
     <footer class="footer">
