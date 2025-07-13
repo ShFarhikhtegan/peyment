@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/fonts.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css" rel="stylesheet">
     <style>
         :root {
             --primary-color: #6c5ce7;
@@ -204,43 +205,83 @@
             z-index: -1;
         }
         
-        /* استایل‌های گالری اسلایدی */
-        .gallery-carousel {
-            padding: 20px;
+        /* استایل‌های گالری بهینه‌شده */
+        .gallery-section {
+            padding: 30px;
         }
         
-        .carousel-item img {
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px;
+        }
+        
+        .gallery-item {
+            position: relative;
             border-radius: 10px;
-            max-height: 400px;
+            overflow: hidden;
+            aspect-ratio: 4/3;
+            transition: all 0.3s ease;
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
             object-fit: cover;
-            margin: 0 auto;
+            transition: transform 0.3s ease;
         }
         
-        .carousel-caption {
-            background: rgba(30, 39, 46, 0.7);
-            border-radius: 10px;
-            padding: 15px;
-            right: 15%;
-            left: 15%;
-            bottom: 20px;
+        .gallery-item:hover img {
+            transform: scale(1.05);
         }
         
-        .carousel-control-prev, 
-        .carousel-control-next {
-            width: 5%;
+        .gallery-caption {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            left: 0;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 10px;
+            font-size: 13px;
+            text-align: center;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .gallery-item:hover .gallery-caption {
+            transform: translateY(0);
+        }
+        
+        /* استایل‌های Lightbox */
+        .lightbox .lb-image {
+            border-radius: 8px;
+        }
+
+        .lb-data .lb-caption {
+            font-size: 16px;
+            line-height: 1.6;
+            text-align: center;
+            font-family: 'Vazirmatn', sans-serif;
+        }
+
+        .lb-nav a.lb-prev, 
+        .lb-nav a.lb-next {
             opacity: 0.8;
+            transition: opacity 0.3s;
         }
-        
-        .carousel-control-prev:hover,
-        .carousel-control-next:hover {
+
+        .lb-nav a.lb-prev:hover, 
+        .lb-nav a.lb-next:hover {
             opacity: 1;
         }
-        
-        .carousel-indicators button {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            margin: 0 5px;
+
+        .lb-close {
+            transition: opacity 0.3s;
+        }
+
+        .lb-close:hover {
+            opacity: 0.8;
         }
         
         /* بقیه استایل‌ها... */
@@ -675,11 +716,8 @@
                 margin-bottom: 30px;
             }
             
-            .carousel-caption {
-                right: 10%;
-                left: 10%;
-                bottom: 10px;
-                font-size: 14px;
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
             }
         }
     </style>
@@ -743,95 +781,77 @@
             </div>
         </div>
 
-        <!-- بخش گالری تصاویر (اسلایدی) -->
-        <div id="gallery-section" class="gallery-carousel glass-card mb-5">
+        <!-- بخش گالری تصاویر با 8 تصویر -->
+        <div id="gallery-section" class="gallery-section glass-card mb-5">
             <h3 class="progress-title text-center mb-4">
                 <i class="fas fa-images"></i>
                 گالری تصاویر پیشرفت پروژه
             </h3>
             
-            <div id="projectCarousel" class="carousel slide" data-bs-ride="carousel">
-                <!-- اندیکاتورها -->
-                <div class="carousel-indicators">
-                    <button type="button" data-bs-target="#projectCarousel" data-bs-slide-to="0" class="active"></button>
-                    <button type="button" data-bs-target="#projectCarousel" data-bs-slide-to="1"></button>
-                    <button type="button" data-bs-target="#projectCarousel" data-bs-slide-to="2"></button>
-                    <button type="button" data-bs-target="#projectCarousel" data-bs-slide-to="3"></button>
-                    <button type="button" data-bs-target="#projectCarousel" data-bs-slide-to="4"></button>
-                    <button type="button" data-bs-target="#projectCarousel" data-bs-slide-to="5"></button>
-                    <button type="button" data-bs-target="#projectCarousel" data-bs-slide-to="6"></button>
-                    <button type="button" data-bs-target="#projectCarousel" data-bs-slide-to="7"></button>
+            <div class="gallery-grid">
+                <!-- تصویر 1 -->
+                <div class="gallery-item">
+                    <a href="images/phase1.jpg" data-lightbox="project-gallery" data-title="مرحله ۱: آغاز عملیات حفاری - دی ۱۴۰۲">
+                        <img src="images/phase1-thumb.jpg" alt="آغاز عملیات حفاری">
+                        <div class="gallery-caption">آغاز عملیات حفاری - دی ۱۴۰۲</div>
+                    </a>
                 </div>
                 
-                <!-- اسلایدها -->
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <img src="images/phase1.jpg" class="d-block w-100" alt="مرحله اول پروژه">
-                        <div class="carousel-caption d-none d-md-block">
-                            <h5>آغاز عملیات حفاری</h5>
-                            <p>دی ۱۴۰۲ - شروع پروژه برق‌رسانی</p>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <img src="images/phase2.jpg" class="d-block w-100" alt="مرحله دوم پروژه">
-                        <div class="carousel-caption d-none d-md-block">
-                            <h5>نصب پایه‌های اولیه</h5>
-                            <p>بهمن ۱۴۰۲ - نصب پایه‌های بتنی</p>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <img src="images/phase3.jpg" class="d-block w-100" alt="مرحله سوم پروژه">
-                        <div class="carousel-caption d-none d-md-block">
-                            <h5>کابل‌کشی اصلی</h5>
-                            <p>اسفند ۱۴۰۲ - کابل‌کشی بین پایه‌ها</p>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <img src="images/phase4.jpg" class="d-block w-100" alt="مرحله چهارم پروژه">
-                        <div class="carousel-caption d-none d-md-block">
-                            <h5>نصب ترانسفورماتور</h5>
-                            <p>فروردین ۱۴۰۳ - نصب ترانس اصلی</p>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <img src="images/phase5.jpg" class="d-block w-100" alt="مرحله پنجم پروژه">
-                        <div class="carousel-caption d-none d-md-block">
-                            <h5>تست اولیه سیستم</h5>
-                            <p>اردیبهشت ۱۴۰۳ - تست اولیه برق‌رسانی</p>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <img src="images/phase6.jpg" class="d-block w-100" alt="مرحله ششم پروژه">
-                        <div class="carousel-caption d-none d-md-block">
-                            <h5>پایان فاز اول</h5>
-                            <p>خرداد ۱۴۰۳ - تکمیل فاز اول پروژه</p>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <img src="images/phase7.jpg" class="d-block w-100" alt="مرحله هفتم پروژه">
-                        <div class="carousel-caption d-none d-md-block">
-                            <h5>آغاز فاز دوم</h5>
-                            <p>تیر ۱۴۰۳ - شروع فاز دوم توسعه</p>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <img src="images/phase8.jpg" class="d-block w-100" alt="مرحله هشتم پروژه">
-                        <div class="carousel-caption d-none d-md-block">
-                            <h5>پیشرفت فاز دوم</h5>
-                            <p>مرداد ۱۴۰۳ - پیشرفت ۷۰% فاز دوم</p>
-                        </div>
-                    </div>
+                <!-- تصویر 2 -->
+                <div class="gallery-item">
+                    <a href="images/phase2.jpg" data-lightbox="project-gallery" data-title="مرحله ۲: نصب پایه‌ها - بهمن ۱۴۰۲">
+                        <img src="images/phase2-thumb.jpg" alt="نصب پایه‌ها">
+                        <div class="gallery-caption">نصب پایه‌ها - بهمن ۱۴۰۲</div>
+                    </a>
                 </div>
                 
-                <!-- کنترل‌های قبلی/بعدی -->
-                <button class="carousel-control-prev" type="button" data-bs-target="#projectCarousel" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">قبلی</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#projectCarousel" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">بعدی</span>
-                </button>
+                <!-- تصویر 3 -->
+                <div class="gallery-item">
+                    <a href="images/phase3.jpg" data-lightbox="project-gallery" data-title="مرحله ۳: کابل‌کشی - اسفند ۱۴۰۲">
+                        <img src="images/phase3-thumb.jpg" alt="کابل‌کشی">
+                        <div class="gallery-caption">کابل‌کشی - اسفند ۱۴۰۲</div>
+                    </a>
+                </div>
+                
+                <!-- تصویر 4 -->
+                <div class="gallery-item">
+                    <a href="images/phase4.jpg" data-lightbox="project-gallery" data-title="مرحله ۴: نصب ترانسفورماتور - فروردین ۱۴۰۳">
+                        <img src="images/phase4-thumb.jpg" alt="نصب ترانسفورماتور">
+                        <div class="gallery-caption">نصب ترانسفورماتور - فروردین ۱۴۰۳</div>
+                    </a>
+                </div>
+                
+                <!-- تصویر 5 -->
+                <div class="gallery-item">
+                    <a href="images/phase5.jpg" data-lightbox="project-gallery" data-title="مرحله ۵: تست سیستم - اردیبهشت ۱۴۰۳">
+                        <img src="images/phase5-thumb.jpg" alt="تست سیستم">
+                        <div class="gallery-caption">تست سیستم - اردیبهشت ۱۴۰۳</div>
+                    </a>
+                </div>
+                
+                <!-- تصویر 6 -->
+                <div class="gallery-item">
+                    <a href="images/phase6.jpg" data-lightbox="project-gallery" data-title="مرحله ۶: تکمیل فاز ۱ - خرداد ۱۴۰۳">
+                        <img src="images/phase6-thumb.jpg" alt="تکمیل فاز ۱">
+                        <div class="gallery-caption">تکمیل فاز ۱ - خرداد ۱۴۰۳</div>
+                    </a>
+                </div>
+                
+                <!-- تصویر 7 -->
+                <div class="gallery-item">
+                    <a href="images/phase7.jpg" data-lightbox="project-gallery" data-title="مرحله ۷: آغاز فاز ۲ - تیر ۱۴۰۳">
+                        <img src="images/phase7-thumb.jpg" alt="آغاز فاز ۲">
+                        <div class="gallery-caption">آغاز فاز ۲ - تیر ۱۴۰۳</div>
+                    </a>
+                </div>
+                
+                <!-- تصویر 8 -->
+                <div class="gallery-item">
+                    <a href="images/phase8.jpg" data-lightbox="project-gallery" data-title="مرحله ۸: پیشرفت فاز ۲ - مرداد ۱۴۰۳">
+                        <img src="images/phase8-thumb.jpg" alt="پیشرفت فاز ۲">
+                        <div class="gallery-caption">پیشرفت فاز ۲ - مرداد ۱۴۰۳</div>
+                    </a>
+                </div>
             </div>
         </div>
 
@@ -934,7 +954,7 @@
 
     <!-- اسکریپت‌های مورد نیاز -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
     <script>
         // تنظیمات پروژه
         let collectedAmount = 616000000; // مبلغ جمع‌آوری شده: 616,000,000 تومان
@@ -1012,12 +1032,15 @@
                 highlightStat.style.animation = 'pulse-glow 2s infinite alternate';
             }, 5000);
 
-            // تنظیمات Carousel
-            const myCarousel = document.querySelector('#projectCarousel');
-            const carousel = new bootstrap.Carousel(myCarousel, {
-                interval: 5000,
-                wrap: true,
-                pause: 'hover'
+            // تنظیمات Lightbox
+            lightbox.option({
+                'resizeDuration': 200,
+                'wrapAround': true,
+                'albumLabel': 'تصویر %1 از %2',
+                'disableScrolling': true,
+                'fadeDuration': 300,
+                'positionFromTop': 100,
+                'alwaysShowNavOnTouchDevices': true
             });
         });
     </script>
