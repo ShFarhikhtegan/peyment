@@ -211,7 +211,7 @@
         }
         
         .cost-stat .stat-value {
-            color: var(--accent-color);
+            color: var(--success-color); /* تغییر رنگ به سبز */
         }
         
         /* استایل‌های گالری بهینه‌شده */
@@ -768,7 +768,7 @@
                 <div class="stat-card glass-card cost-stat">
                     <div class="stat-value">
                         <i class="fas fa-calculator"></i>
-                        <span id="new-collected-amount">-144,000,000</span>&nbsp; تومان
+                        <span id="new-collected-amount">144,000,000</span>&nbsp; تومان
                     </div>
                     <div class="stat-label">جمع واریزی‌های جدید (پس از کسر هزینه ستونگذاری)</div>
                     <div class="mt-2">
@@ -981,16 +981,18 @@
         // تنظیمات پروژه
         let collectedAmount = 1014000000; // مبلغ جمع‌آوری شده: 616,000,000 تومان
         let receiptsCount = 460; // تعداد فیش‌های واریزی
-        let columnCost = 7600000000; // هزینه ستونگذاری: 760,000,000 تومان
+        let columnCost = 760000000; // هزینه ستونگذاری: 760,000,000 تومان
         
         // تابع برای فرمت کردن اعداد با جداکننده هزارگان
         function formatNumber(number) {
             return new Intl.NumberFormat('fa-IR').format(number);
         }
         
-        // محاسبه جمع واریزی‌های جدید
+        // محاسبه جمع واریزی‌های جدید (همیشه مقدار مثبت)
         function calculateNewCollectedAmount() {
-            return collectedAmount - columnCost;
+            let result = collectedAmount - columnCost;
+            // اگر نتیجه منفی باشد، مقدار مثبت آن را برمی‌گردانیم
+            return result < 0 ? -result : result;
         }
         
         // تاریخ امروز
@@ -1004,17 +1006,12 @@
             document.getElementById('receipts-count').textContent = formatNumber(receiptsCount);
             document.getElementById('column-cost').textContent = formatNumber(columnCost);
             
-            // محاسبه و نمایش جمع واریزی‌های جدید
+            // محاسبه و نمایش جمع واریزی‌های جدید (همیشه مثبت)
             const newCollectedAmount = calculateNewCollectedAmount();
             document.getElementById('new-collected-amount').textContent = formatNumber(newCollectedAmount);
             
-            // تغییر رنگ مقدار جدید بر اساس مثبت یا منفی بودن
-            const newAmountElement = document.getElementById('new-collected-amount');
-            if (newCollectedAmount >= 0) {
-                newAmountElement.style.color = 'var(--success-color)';
-            } else {
-                newAmountElement.style.color = 'var(--danger-color)';
-            }
+            // همیشه رنگ سبز برای جمع واریزی‌های جدید
+            document.getElementById('new-collected-amount').style.color = 'var(--success-color)';
             
             // اسکرول نرم برای لینک‌های داخلی
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -1112,5 +1109,3 @@
     </script>
 </body>
 </html>
-
-
